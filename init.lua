@@ -7,6 +7,7 @@ local manager = require("manager")
 local log = plugin.log
 local command = plugin.command
 local fs = plugin.fs
+local os = plugin.os
 
 -- plugin information
 manager.name = "Tailwind CSS for Dioxus CLI"
@@ -71,7 +72,13 @@ end
 
 function download()
     log.info("Downloading Tailwind CLI... - joking, that's not implemented yet")
-    -- network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64", "tailwindcss")
+    if os.current_platform == "windows" then
+        -- network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe", "tailwindcss.exe")
+    elseif os.current_platform == "macos" then
+        -- network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-x64", "tailwindcss")
+    elseif os.current_platform == "linux" then
+        -- network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64", "tailwindcss")
+    end
     log.info("Downloaded Tailwind CLI")
 end
 
