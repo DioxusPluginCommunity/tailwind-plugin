@@ -46,7 +46,6 @@ end
 
 function build_css()
     --- Runs Tailwind and builds the CSS file in the ./public folder.
-
     log.info("Building CSS...")
     command.exec({ "tailwindcss", "build", "-c", "src/tailwind.config.js", "-i", "src/input.css", "-o", "public/style.css" }, "inhert", "inhert")
 end
@@ -68,15 +67,32 @@ end
 
 function init_config()
     --- Creates tailwind.config.js and input.css in the project directory.
+    -- If the files already exist, it will not overwrite them.
 
-    log.info("Initialize Tailwind config and input CSS...")
-    local config = fs.file_get_content(library_dir .. "/../dioxus-cli-tailwind-plugin/assets/tailwind.config.js")
-    local status = fs.file_set_content("src/tailwind.config.js", config)
+    log.info("Initializing Tailwind config.")
+    copy_config_file("/../dioxus-cli-tailwind-plugin/assets/tailwind.config.js", "src/tailwind.config.js")
+    copy_config_file("/../dioxus-cli-tailwind-plugin/assets/input.css", "src/input.css")
+    log.info("Initialized successfully.")
+end
 
-    local input_css = fs.file_get_content(library_dir .. "/../dioxus-cli-tailwind-plugin/assets/input.css")
-    status = fs.file_set_content("src/input.css", input_css)
+function copy_config_file(source_file, dest_file)
+    --- Copies a file from the given source to the given destination.
+    -- @param source_file string - The source file path.
+    -- @param dest_file string - The destination file path.
 
-    log.info("Initialized Tailwind config and input CSS")
+    if fs.file_get_content(dest_file) ~= "" then
+        log.info(dest_file .. " already exists. Skipping.")
+    else
+        local input_css = fs.file_get_content(library_dir .. source_file)
+        status = fs.file_set_content(dest_file, input_css)
+
+        if status == false then
+            log.error("Failed to create " .. dest_file .. ".")
+            return
+        else
+            log.info("Created " .. dest_file .. ".")
+        end
+    end
 end
 
 return manager
