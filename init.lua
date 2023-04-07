@@ -7,18 +7,19 @@ local fs = plugin.fs
 local os = plugin.os
 local network = plugin.network
 local path = plugin.path
+local dirs = plugin.dirs
 
 local manager = require("manager")
 manager.name = "Tailwind CSS for Dioxus CLI"
 manager.repository = "https://github.com/arqalite/dioxus-cli-tailwind-plugin"
 manager.author = "Antonio Curavalea <one.curavan@protonmail.com>"
-manager.version = "0.0.2"
+manager.version = "0.0.4"
 
 -- init manager plugin api
 plugin.init(manager)
 
 manager.on_init = function()
-    -- download()
+    download()
     init_config()
     return true
 end
@@ -43,23 +44,51 @@ function build_css()
     --- Runs Tailwind and builds the CSS file in the ./public folder.
     log.info("Building CSS...")
     command.exec(
-    { "tailwindcss", "build", "-c", "src/tailwind.config.js", "-i", "src/input.css", "-o", "public/style.css" }, "inhert",
-    "inhert")
+        { tostring(path.join(dirs.bin_dir(), "tailwindcss")), "build", "-c", "src/tailwind.config.js", "-i",
+            "src/input.css", "-o", "public/style.css" }, "inhert",
+        "inhert")
+
+    if os.current_platform() == "windows" then
+        command.exec(
+            { tostring(path.join(dirs.bin_dir(), "tailwindcss.exe")), "build", "-c", "src/tailwind.config.js", "-i",
+                "src/input.css", "-o", "public/style.css" }, "inhert",
+            "inhert")
+    else
+        command.exec(
+            { tostring(path.join(dirs.bin_dir(), "tailwindcss")), "build", "-c", "src/tailwind.config.js", "-i",
+                "src/input.css", "-o", "public/style.css" }, "inhert",
+            "inhert")
+    end
 end
 
 function download()
     --- Downloads Tailwind CLI based on OS.
-    -- TODO: Move the CLI to the appropriate folder.
+    if not (path.is_file(path.join(dirs.bin_dir(), "tailwindcss")) or path.is_file(path.join(dirs.bin_dir(), "tailwindcss.exe"))) then
+        log.info("Downloading Tailwind CLI...")
 
-    log.info("Downloading Tailwind CLI... (unimplemented)")
-    if os.current_platform() == "windows" then
-        network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe", "tailwindcss.exe")
-    elseif os.current_platform() == "macos" then
-        network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-x64", "tailwindcss")
-    elseif os.current_platform() == "linux" then
-        network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64", "tailwindcss")
+        local url, executable, platform
+        platform = os.current_platform()
+        if platform == "windows" then
+            url = "https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe"
+            executable = path.join(dirs.bin_dir(), "tailwindcss.exe")
+        elseif platform == "macos" then
+            url = "https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-x64"
+            executable = path.join(dirs.bin_dir(), "tailwindcss")
+        elseif platform == "linux" then
+            url = "https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64"
+            executable = path.join(dirs.bin_dir(), "tailwindcss")
+        end
+        if not network.download_file(url, executable) then
+            log.error("Failed to download Tailwind CLI.")
+        else
+            if platform == "macos" or platform == "linux" then
+                command.exec({ "chmod", "+x", tostring(path.join(dirs.bin_dir(), "tailwindcss")) }, "inhert", "inhert")
+            end
+            log.info("Downloaded Tailwind CLI")
+        end
+    else
+        log.info("Tailwind CLI already exists. Skipping.")
     end
-    log.info("Downloaded Tailwind CLI")
 end
 
 function init_config()
