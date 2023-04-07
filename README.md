@@ -4,6 +4,7 @@ Tailwind CSS plugin for [Dioxus CLI]. Currenly a very early WIP.
 ## Goals
 
 * Download Tailwind automatically on first run, making sure it downloads the right executable for your OS
+    * Currently doesn't work - bug in Dioxus CLI
 * On first run, generate default config files without overwriting existing ones.
 * Regenerate CSS on each reload
     * Currently it's bugged and the CLI and plugin are causing each other to reload repeatedly. This is a known issue and will be fixed soon.

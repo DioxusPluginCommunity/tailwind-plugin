@@ -10,7 +10,7 @@ local manager = require("manager")
 manager.name = "Tailwind CSS for Dioxus CLI"
 manager.repository = "https://github.com/arqalite/dioxus-cli-tailwind-plugin"
 manager.author = "Antonio Curavalea <one.curavan@protonmail.com>"
-manager.version = "0.0.1"
+manager.version = "0.0.0"
 
 -- init manager plugin api
 plugin.init(manager)
@@ -80,7 +80,7 @@ function copy_config_file(source_file, dest_file)
     -- @param source_file string - The source file path.
     -- @param dest_file string - The destination file path.
 
-    if fs.file_get_content(dest_file) ~= "" then
+    if fs.find_file(dest_file) then
         log.info(dest_file .. " already exists. Skipping.")
     else
         local input_css = fs.file_get_content(library_dir .. source_file)
