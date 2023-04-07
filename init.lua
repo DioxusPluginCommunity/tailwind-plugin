@@ -10,31 +10,24 @@ local manager = require("manager")
 manager.name = "Tailwind CSS for Dioxus CLI"
 manager.repository = "https://github.com/arqalite/dioxus-cli-tailwind-plugin"
 manager.author = "Antonio Curavalea <one.curavan@protonmail.com>"
-manager.version = "0.0.0"
+manager.version = "0.0.1"
 
 -- init manager plugin api
 plugin.init(manager)
 
 manager.on_init = function()
-    log.info("Initializing plugin: " .. manager.name)
-
     download()
     init_config()
-
     return true
 end
 
 ---@param info BuildInfo
 manager.build.on_start = function(info)
-    log.info("Build starting: " .. info.name)
     build_css()
 end
 
-
 ---@param info ServeStartInfo
 manager.serve.on_start = function(info)
-    -- this function will after clean & print to run, so you can print some thing.
-    log.info("Serve start: " .. info.name)
     build_css()
 end
 
@@ -47,7 +40,9 @@ end
 function build_css()
     --- Runs Tailwind and builds the CSS file in the ./public folder.
     log.info("Building CSS...")
-    command.exec({ "tailwindcss", "build", "-c", "src/tailwind.config.js", "-i", "src/input.css", "-o", "public/style.css" }, "inhert", "inhert")
+    command.exec(
+    { "tailwindcss", "build", "-c", "src/tailwind.config.js", "-i", "src/input.css", "-o", "public/style.css" }, "inhert",
+    "inhert")
 end
 
 function download()
