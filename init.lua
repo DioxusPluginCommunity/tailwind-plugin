@@ -5,18 +5,20 @@ local log = plugin.log
 local command = plugin.command
 local fs = plugin.fs
 local os = plugin.os
+local network = plugin.network
+local path = plugin.path
 
 local manager = require("manager")
 manager.name = "Tailwind CSS for Dioxus CLI"
 manager.repository = "https://github.com/arqalite/dioxus-cli-tailwind-plugin"
 manager.author = "Antonio Curavalea <one.curavan@protonmail.com>"
-manager.version = "0.0.1"
+manager.version = "0.0.2"
 
 -- init manager plugin api
 plugin.init(manager)
 
 manager.on_init = function()
-    download()
+    -- download()
     init_config()
     return true
 end
@@ -50,12 +52,12 @@ function download()
     -- TODO: Move the CLI to the appropriate folder.
 
     log.info("Downloading Tailwind CLI... (unimplemented)")
-    if os.current_platform == "windows" then
-        -- network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe", "tailwindcss.exe")
-    elseif os.current_platform == "macos" then
-        -- network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-x64", "tailwindcss")
-    elseif os.current_platform == "linux" then
-        -- network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64", "tailwindcss")
+    if os.current_platform() == "windows" then
+        network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe", "tailwindcss.exe")
+    elseif os.current_platform() == "macos" then
+        network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-x64", "tailwindcss")
+    elseif os.current_platform() == "linux" then
+        network.download_file("https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64", "tailwindcss")
     end
     log.info("Downloaded Tailwind CLI")
 end
@@ -75,7 +77,7 @@ function copy_config_file(source_file, dest_file)
     -- @param source_file string - The source file path.
     -- @param dest_file string - The destination file path.
 
-    if fs.find_file(dest_file) then
+    if path.is_file(dest_file) then
         log.info(dest_file .. " already exists. Skipping.")
     else
         local input_css = fs.file_get_content(library_dir .. source_file)
