@@ -4,7 +4,6 @@ Tailwind CSS plugin for [Dioxus CLI]. Currenly a very early WIP.
 ## Goals
 
 * Download Tailwind automatically on first run, making sure it downloads the right executable for your OS
-    * Currently doesn't work - bug in Dioxus CLI
 * On first run, generate default config files without overwriting existing ones.
 * Regenerate CSS on each reload
     * Currently it's bugged and the CLI and plugin are causing each other to reload repeatedly. This is a known issue and will be fixed soon.
@@ -21,7 +20,7 @@ Then install the plugin:
 dioxus plugin add https://github.com/arqalite/dioxus-cli-tailwind-plugin
 ```
 
-Downloading Tailwind automatically doesn't work, so make sure you have the [Tailwind CLI] installed in your PATH.
+Run your project normally with `dioxus serve` - it should work and run Tailwind automatically for you.
 
 ## Contributing
 All contributions are welcome! Please feel free to open an issue or a pull request.
