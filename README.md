@@ -1,4 +1,4 @@
-# dioxus-cli-tailwind-plugin
+# Tailwind CSS for Dioxus
 Tailwind CSS plugin for [Dioxus CLI]. Currenly a very early WIP.
 
 ## Goals
@@ -17,7 +17,7 @@ cargo install --git https://github.com/mrxiaozhuox/dioxus-cli
 Then install the plugin:
 
 ```bash
-dioxus plugin add https://github.com/arqalite/dioxus-cli-tailwind-plugin
+dioxus plugin add https://github.com/DioxusPluginCommunity/tailwind-plugin/
 ```
 
 Run your project normally with `dioxus serve` - it should work and run Tailwind automatically for you.
@@ -25,7 +25,7 @@ Run your project normally with `dioxus serve` - it should work and run Tailwind 
 ## Contributing
 All contributions are welcome! Please feel free to open an issue or a pull request.
 ## License
-This project is licensed under the [MIT license](https://github.com/arqalite/rummy-nights/blob/main/LICENSE).
+This project is licensed under the [MIT license](https://github.com/DioxusPluginCommunity/tailwind-plugin/blob/main/LICENSE).
 
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in Rummy Nights, shall be licensed as MIT, without any additional
