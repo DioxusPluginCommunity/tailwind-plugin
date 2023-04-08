@@ -43,10 +43,6 @@ end
 function build_css()
     --- Runs Tailwind and builds the CSS file in the ./public folder.
     log.info("Building CSS...")
-    command.exec(
-        { tostring(path.join(dirs.bin_dir(), "tailwindcss")), "build", "-c", "src/tailwind.config.js", "-i",
-            "src/input.css", "-o", "public/style.css" }, "inhert",
-        "inhert")
 
     if os.current_platform() == "windows" then
         command.exec(
