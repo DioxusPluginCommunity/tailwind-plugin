@@ -92,8 +92,8 @@ function init_config()
     -- If the files already exist, it will not overwrite them.
 
     log.info("Initializing Tailwind config.")
-    copy_config_file("/../dioxus-cli-tailwind-plugin/assets/tailwind.config.js", "src/tailwind.config.js")
-    copy_config_file("/../dioxus-cli-tailwind-plugin/assets/input.css", "src/input.css")
+    copy_config_file("/assets/tailwind.config.js", "src/tailwind.config.js")
+    copy_config_file("/assets/input.css", "src/input.css")
     log.info("Initialized successfully.")
 end
 
@@ -105,7 +105,7 @@ function copy_config_file(source_file, dest_file)
     if path.is_file(dest_file) then
         log.info(dest_file .. " already exists. Skipping.")
     else
-        local input_css = fs.file_get_content(library_dir .. source_file)
+        local input_css = fs.file_get_content(dirs.plugin_dir() .. source_file)
         status = fs.file_set_content(dest_file, input_css)
 
         if status == false then
