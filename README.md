@@ -27,8 +27,9 @@ dioxus plugin init
 Now we can finally install the plugin:
 
 ```bash
-dioxus plugin add https://github.com/DioxusPluginCommunity/tailwind-plugin/
+dioxus plugin add --git https://github.com/DioxusPluginCommunity/tailwind-plugin
 ```
+<strong>NOTE: Notice the lack of a trailing slash at the end - if you include it the plugin will not install. Bug in CLI.</strong>
 
 Run `dioxus plugin list` to make sure it's installed correctly. The plugin should initialize and start downloading Tailwind and add two default config files to your project (src/tailwind.config.js and src/input.css).
 
@@ -40,6 +41,7 @@ style = ["style.css"]
 ```
 
 We should be good to go! Run `dioxus serve` and you should see Tailwind CSS working. As you change any *.rs files, the plugin will automatically regenerate the CSS file as the server reloads.
+It will reload probably 5 times every time you make a change, but it works. :)
 
 ## Contributing
 All contributions are welcome! Please feel free to open an issue or a pull request.
