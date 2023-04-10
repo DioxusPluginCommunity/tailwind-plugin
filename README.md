@@ -2,25 +2,44 @@
 Tailwind CSS plugin for [Dioxus CLI]. Currenly a very early WIP.
 
 ## Goals
-
 * Download Tailwind automatically on first run, making sure it downloads the right executable for your OS
 * On first run, generate default config files without overwriting existing ones.
 * Regenerate CSS on each reload
     * Currently it's bugged and the CLI and plugin are causing each other to reload repeatedly. This is a known issue and will be fixed soon.
+
 ## Usage
-The plugin system is still in development, so first install @mrxiaozhuox's fork of Dioxus CLI:
+The plugin system is still in development, so these steps will change frequently and will cover only new projects. A guide to migrate existing projects will be added once the plugin system is finalized and released.
+
+For now, you will first need to install @arqalite's fork of Dioxus CLI which patches a file download issue:
 
 ```bash
-cargo install --git https://github.com/mrxiaozhuox/dioxus-cli
+cargo install --git https://github.com/arqalite/dioxus-cli
 ```
-    
-Then install the plugin:
+
+Once installed, you can create a new project and initialize the plugin system:
+
+```bash
+dioxus create <project-name>
+cd <project-name>
+dioxus plugin init
+```
+
+Now we can finally install the plugin:
 
 ```bash
 dioxus plugin add https://github.com/DioxusPluginCommunity/tailwind-plugin/
 ```
 
-Run your project normally with `dioxus serve` - it should work and run Tailwind automatically for you.
+Run `dioxus plugin list` to make sure it's installed correctly. The plugin should initialize and start downloading Tailwind and add two default config files to your project (src/tailwind.config.js and src/input.css).
+
+Last step - open Dioxus.toml and add "public/style.css" as shown below:
+
+```toml
+# CSS style file
+style = ["style.css"]
+```
+
+We should be good to go! Run `dioxus serve` and you should see Tailwind CSS working. As you change any *.rs files, the plugin will automatically regenerate the CSS file as the server reloads.
 
 ## Contributing
 All contributions are welcome! Please feel free to open an issue or a pull request.
