@@ -1,5 +1,3 @@
-package.path = library_dir .. "/?.lua"
-
 local plugin = require("plugin")
 local log = plugin.log
 local command = plugin.command
