@@ -10,7 +10,7 @@ Tailwind CSS plugin for [Dioxus CLI]. Currenly a very early WIP.
 ## Usage
 The plugin system is still in development, so these steps will change frequently and will cover only new projects. A guide to migrate existing projects will be added once the plugin system is finalized and released.
 
-For now, you will first need to install @arqalite's fork of Dioxus CLI which patches a file download issue:
+For now, you will first need to install @arqalite's fork of Dioxus CLI:
 
 ```bash
 cargo install --git https://github.com/arqalite/dioxus-cli
@@ -33,7 +33,7 @@ dioxus plugin add --git https://github.com/DioxusPluginCommunity/tailwind-plugin
 
 Run `dioxus plugin list` to make sure it's installed correctly. The plugin should initialize and start downloading Tailwind and add two default config files to your project (src/tailwind.config.js and src/input.css).
 
-Last step - open Dioxus.toml and add "public/style.css" as shown below:
+Last step - open Dioxus.toml and add "style.css" as shown below:
 
 ```toml
 # CSS style file
@@ -49,7 +49,7 @@ All contributions are welcome! Please feel free to open an issue or a pull reque
 This project is licensed under the [MIT license](https://github.com/DioxusPluginCommunity/tailwind-plugin/blob/main/LICENSE).
 
 Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in Rummy Nights, shall be licensed as MIT, without any additional
+for inclusion in this project, shall be licensed as MIT, without any additional
 terms or conditions. We reserve the right to reject contributions that will not be licensed as such.
 
 [Dioxus CLI]: https://github.com/DioxusLabs/cli

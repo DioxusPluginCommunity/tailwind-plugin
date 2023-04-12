@@ -11,7 +11,7 @@ local manager = require("manager")
 manager.name = "Tailwind CSS for Dioxus CLI"
 manager.repository = "https://github.com/arqalite/dioxus-cli-tailwind-plugin"
 manager.author = "Antonio Curavalea <one.curavan@protonmail.com>"
-manager.version = "0.0.4"
+manager.version = "0.0.5"
 
 -- init manager plugin api
 plugin.init(manager)
