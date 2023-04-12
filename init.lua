@@ -23,9 +23,9 @@ if plugin.os.current_platform() == "windows" then
 end
 
 -- Hacky way of loading other Lua files 
-local download = dofile(plugin_folder .. "/download.lua")
-local config = dofile(plugin_folder .. "/config.lua")
-local build = dofile(plugin_folder .. "/build.lua")
+local download = dofile(plugin_folder .. "/src/download.lua")
+local config = dofile(plugin_folder .. "/src/config.lua")
+local build = dofile(plugin_folder .. "/src/build.lua")
 
 
 -- When the plugin first runs, we download Tailwind and initialize the config.
