@@ -5,7 +5,8 @@ Tailwind CSS plugin for [Dioxus CLI]. Currenly a very early WIP.
 * Download Tailwind automatically on first run, making sure it downloads the right executable for your OS
 * On first run, generate default config files without overwriting existing ones.
 * Regenerate CSS on each reload
-    * Currently it's bugged and the CLI and plugin are causing each other to reload repeatedly. This is a known issue and will be fixed soon.
+
+We're still figuring out the full scope of the plugin. If you're interested in using it but a feature that you need is missing, open an issue and let us know!
 
 ## Usage
 The plugin system is still in development, so these steps will change frequently and will cover only new projects. A guide to migrate existing projects will be added once the plugin system is finalized and released.
@@ -42,7 +43,6 @@ style = ["style.css"]
 ```
 
 Now, we should be good to go! Run `dioxus serve` and you should see Tailwind CSS working. As you change any *.rs files, the plugin will automatically regenerate the CSS file as the server reloads.
-It will reload probably 5 times every time you make a change, but it works. :)
 
 ## Contributing
 All contributions are welcome! Please feel free to open an issue or a pull request.
