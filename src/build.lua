@@ -12,10 +12,12 @@
 local build = {}
 local plugin = require("plugin")
 
-function build.build_css(executable, src_folder)
-    --- Runs Tailwind and builds the CSS file in the ./public folder.
-    plugin.log.info("Building CSS...")
-    plugin.command.exec({ executable, "build", "-c", src_folder .. "/tailwind.config.js", "-i", src_folder .. "/input.css", "-o", "public/style.css" }, "inhert", "inhert")
+function build.build_css(executable, src_folder, css_file)
+   --- Runs Tailwind and builds the CSS file in the ./public folder.
+   plugin.log.info("Building CSS...")
+   plugin.command.exec(
+   { executable, "build", "-c", src_folder .. "/tailwind.config.js", "-i", src_folder .. "/input.css", "-o",
+      "public/" .. css_file }, "inhert", "inhert")
 end
 
 return build

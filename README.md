@@ -33,14 +33,15 @@ dioxus plugin add --git https://github.com/DioxusPluginCommunity/tailwind-plugin
 
 Run `dioxus plugin list` to make sure it's installed correctly. The plugin should initialize and start downloading Tailwind and add two default config files to your project (src/tailwind.config.js and src/input.css).
 
-Last step - open Dioxus.toml and add "style.css" as shown below:
+By default, the plugin generates the CSS file at `./public/style.css`. Let's add that path in `Dioxus.toml` so the CLI knows where to find it.
+Keep in mind the CLI looks by default in the public folder, so we just need to specify the filename, not the full path:
 
 ```toml
 # CSS style file
 style = ["style.css"]
 ```
 
-We should be good to go! Run `dioxus serve` and you should see Tailwind CSS working. As you change any *.rs files, the plugin will automatically regenerate the CSS file as the server reloads.
+Now, we should be good to go! Run `dioxus serve` and you should see Tailwind CSS working. As you change any *.rs files, the plugin will automatically regenerate the CSS file as the server reloads.
 It will reload probably 5 times every time you make a change, but it works. :)
 
 ## Contributing
