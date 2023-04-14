@@ -17,12 +17,18 @@ local plugin_folder = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins
 local bin_folder = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin/bin/")
 local tailwind_path = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin/bin/tailwindcss")
 
+-- Basically a ternary operator but not really.
+-- If Dioxus.toml has a filename defined in `style` then we use that one,
+-- otherwise we default to "style.css"
+local css_file = plugin.config.dioxus_toml().web.resource.style[1] ~= "" and
+plugin.config.dioxus_toml().web.resource.style[1] or "style.css"
+
 -- For Unix-like OSes, the binary is named "tailwindcss", but for Windows it's "tailwindcss.exe".
 if plugin.os.current_platform() == "windows" then
     tailwind_path = tailwind_path .. ".exe"
 end
 
--- Hacky way of loading other Lua files 
+-- Hacky way of loading other Lua files
 local download = dofile(plugin_folder .. "/src/download.lua")
 local config = dofile(plugin_folder .. "/src/config.lua")
 local build = dofile(plugin_folder .. "/src/build.lua")
@@ -38,20 +44,20 @@ end
 -- When building the project, we build the CSS file alongside it.
 ---@param info BuildInfo
 manager.build.on_start = function(info)
-    build.build_css(tailwind_path, src_folder)
+    build.build_css(tailwind_path, src_folder, css_file)
 end
 
 -- We build the CSS when the server starts, and after every rebuild.
--- The plan is to add a before_serve event in the CLI to be able to compile Tailwind before rebuilding, 
+-- The plan is to add a before_serve event in the CLI to be able to compile Tailwind before rebuilding,
 -- to avoid repeatedly triggering the CLI reloading mechanism.
 ---@param info ServeStartInfo
 manager.serve.on_start = function(info)
-    build.build_css(tailwind_path, src_folder)
+    build.build_css(tailwind_path, src_folder, css_file)
 end
 
 ---@param info ServeRebuildInfo
 manager.serve.on_rebuild = function(info)
-    build.build_css(tailwind_path, src_folder)
+    build.build_css(tailwind_path, src_folder, css_file)
 end
 
 return manager
