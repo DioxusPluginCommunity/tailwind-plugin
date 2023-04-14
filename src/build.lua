@@ -17,7 +17,7 @@ function build.build_css(executable, src_folder, css_file)
    plugin.log.info("Building CSS...")
    plugin.command.exec(
    { executable, "build", "-c", src_folder .. "/tailwind.config.js", "-i", src_folder .. "/input.css", "-o",
-      "public/" .. css_file }, "inhert", "inhert")
+      "public/" .. css_file, "--minify" }, "inhert", "inhert")
 end
 
 return build
