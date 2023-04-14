@@ -56,7 +56,12 @@ manager.serve.on_start = function(info)
 end
 
 ---@param info ServeRebuildInfo
-manager.serve.on_rebuild = function(info)
+manager.serve.on_rebuild_end = function(info)
+    --build.build_css(tailwind_path, src_folder, css_file)
+end
+
+---@param info ServeRebuildInfo
+manager.serve.on_rebuild_start = function(info)
     build.build_css(tailwind_path, src_folder, css_file)
 end
 
