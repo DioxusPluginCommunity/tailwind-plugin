@@ -16,6 +16,10 @@ function download.download(destination_folder)
     -- @param destination_folder string - The source file path.
 
     if not (plugin.path.is_file(destination_folder .. "/tailwindcss") or plugin.path.is_file(destination_folder .. "/tailwindcss.exe")) then
+        if not plugin.path.is_dir(destination_folder) then
+            plugin.fs.create_dir(destination_folder, true)
+        end
+
         plugin.log.info("Downloading Tailwind CLI...")
 
         local url, executable, platform
