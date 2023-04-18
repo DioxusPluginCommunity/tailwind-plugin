@@ -11,8 +11,6 @@
 
 local build = {}
 local plugin = require("plugin")
-local download = dofile(plugin_folder .. "/src/download.lua")
-
 
 function build.build_css(executable, src_folder, css_file)
    if not (plugin.path.is_file(bin_folder .. "/tailwindcss") or plugin.path.is_file(bin_folder .. "/tailwindcss.exe")) then
