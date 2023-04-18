@@ -8,14 +8,14 @@ local manager = require("manager")
 manager.name = "Tailwind CSS for Dioxus CLI"
 manager.repository = "https://github.com/DioxusPluginCommunity/tailwind-plugin"
 manager.author = "Antonio Curavalea <one.curavan@protonmail.com>"
-manager.version = "0.1.0"
+manager.version = "0.2.0"
 plugin.init(manager)
 
 -- Define paths since we can't reliably get them from the Dioxus CLI.
-local src_folder = plugin.path.join(plugin.dirs.crate_dir(), "src")
-local plugin_folder = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin")
-local bin_folder = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin/bin/")
-local tailwind_path = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin/bin/tailwindcss")
+src_folder = plugin.path.join(plugin.dirs.crate_dir(), "src")
+plugin_folder = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin")
+bin_folder = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin/bin/")
+tailwind_path = plugin.path.join(plugin.dirs.crate_dir(), ".dioxus/plugins/tailwind-plugin/bin/tailwindcss")
 
 -- Basically a ternary operator but not really.
 -- If Dioxus.toml has a filename defined in `style` then we use that one,
