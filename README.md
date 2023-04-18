@@ -44,6 +44,14 @@ style = ["style.css"]
 
 Now, we should be good to go! Run `dioxus serve` and you should see Tailwind CSS working. As you change any *.rs files, the plugin will automatically regenerate the CSS file as the server reloads.
 
+**NOTE:** When committing projects using this plugin, we recommend adding this line to your .gitignore:
+```gitignore
+.dioxus/plugins/Plugin.lock
+```
+
+This ensures the plugin runs the initialization phase and downloads Tailwind for other contributors.
+This should instead be a feature of the plugin (check if Tailwind's missing and redownload it, maybe even update when needed), but until then please add that to your .gitignore.
+
 ## Contributing
 All contributions are welcome! Please feel free to open an issue or a pull request.
 ## License
