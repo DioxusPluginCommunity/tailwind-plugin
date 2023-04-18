@@ -8,7 +8,7 @@ local manager = require("manager")
 manager.name = "Tailwind CSS for Dioxus CLI"
 manager.repository = "https://github.com/DioxusPluginCommunity/tailwind-plugin"
 manager.author = "Antonio Curavalea <one.curavan@protonmail.com>"
-manager.version = "0.1.0"
+manager.version = "0.2.0"
 plugin.init(manager)
 
 -- Define paths since we can't reliably get them from the Dioxus CLI.
