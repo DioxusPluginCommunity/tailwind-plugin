@@ -11,7 +11,7 @@
 local download = {}
 local plugin = require("plugin")
 
-function download.download(destination_folder)
+function download.download_tailwind(destination_folder)
     --- Downloads Tailwind CLI based on operating system.
     -- @param destination_folder string - The source file path.
 

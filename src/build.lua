@@ -11,9 +11,20 @@
 
 local build = {}
 local plugin = require("plugin")
+local download = dofile(plugin_folder .. "/src/download.lua")
+
 
 function build.build_css(executable, src_folder, css_file)
+   if not (plugin.path.is_file(bin_folder .. "/tailwindcss") or plugin.path.is_file(bin_folder .. "/tailwindcss.exe")) then
+      download.download_tailwind(bin_folder)
+   end
+
+   build.run_tailwind(executable, src_folder, css_file)
+end
+
+function build.run_tailwind(executable, src_folder, css_file)
    --- Runs Tailwind and builds the CSS file in the ./public folder.
+
    plugin.log.info("Building CSS...")
    plugin.command.exec(
    { executable, "build", "-c", src_folder .. "/tailwind.config.js", "-i", src_folder .. "/input.css", "-o",
