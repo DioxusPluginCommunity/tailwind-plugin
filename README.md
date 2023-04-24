@@ -12,10 +12,10 @@ We're still figuring out the full scope of the plugin. If you're interested in u
 ## Usage
 The plugin system is still in development, so these steps will change frequently and will cover only new projects. A guide to migrate existing projects will be added once the plugin system is finalized and released.
 
-For now, you will first need to install @arqalite's fork of Dioxus CLI:
+For now, you will first need to install @mrxiaozhuox's fork of Dioxus CLI:
 
 ```bash
-cargo install --git https://github.com/arqalite/dioxus-cli
+cargo install --git https://github.com/mrxiaozhuox/dioxus-cli
 ```
 
 Once installed, you can create a new project and initialize the plugin system:
